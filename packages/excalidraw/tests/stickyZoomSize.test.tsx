@@ -7,6 +7,8 @@ import { Excalidraw } from "../index";
 import { Pointer } from "./helpers/ui";
 import { act, render } from "./test-utils";
 
+import type { ExcalidrawTextElement } from "@excalidraw/element/types";
+
 import type { ExcalidrawImperativeAPI, NormalizedZoomValue } from "../types";
 
 describe("new sticky note size follows zoom", () => {
@@ -33,26 +35,30 @@ describe("new sticky note size follows zoom", () => {
     mouse.moveTo(100, 100);
     mouse.down();
     mouse.up();
-    return h.elements.find((el) => el.type === "stickynote") as any;
+    const note = h.elements.find((el) => el.type === "stickynote")!;
+    const label = h.elements.find(
+      (el) => el.type === "text" && el.containerId === note.id,
+    ) as ExcalidrawTextElement;
+    return { note, label };
   };
 
   it("creates a 100 unit note at 100% zoom", () => {
-    const note = drawNoteAtZoom(1);
+    const { note, label } = drawNoteAtZoom(1);
     expect(note.width).toBe(100);
     expect(note.height).toBe(100);
-    expect(note.fontSize).toBe(14);
+    expect(label.baseFontSize).toBe(14);
   });
 
   it("creates a larger note when zoomed out", () => {
-    const note = drawNoteAtZoom(0.5);
+    const { note, label } = drawNoteAtZoom(0.5);
     expect(note.width).toBe(200);
     expect(note.height).toBe(200);
-    expect(note.fontSize).toBe(28);
+    expect(label.baseFontSize).toBe(28);
   });
 
   it("creates a smaller note, floored, when zoomed in", () => {
-    const note = drawNoteAtZoom(4);
+    const { note, label } = drawNoteAtZoom(4);
     expect(note.width).toBe(50);
-    expect(note.fontSize).toBe(10);
+    expect(label.baseFontSize).toBe(10);
   });
 });

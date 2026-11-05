@@ -2,27 +2,31 @@ import type { ElementOrToolType } from "@excalidraw/excalidraw/types";
 
 export const hasBackground = (type: ElementOrToolType) =>
   type === "rectangle" ||
+  type === "stickynote" ||
   type === "iframe" ||
   type === "embeddable" ||
   type === "ellipse" ||
   type === "diamond" ||
   type === "line" ||
   type === "freedraw" ||
-  // A stickynote's fill is its defining visual. Omitting it here made
-  // shouldTestInside() false for stickynotes, so a click on a note's
-  // interior fell through to whatever sat beneath it -- they could not be
-  // selected or dragged at all.
-  type === "stickynote";
+  type === "autoshape" ||
+  // tool-only type; makes the `G` background shortcut work for bucket fill
+  type === "bucketfill";
+
+export const hasFillStyle = (type: ElementOrToolType) =>
+  hasBackground(type) && type !== "stickynote";
 
 export const hasStrokeColor = (type: ElementOrToolType) =>
   type === "rectangle" ||
+  type === "stickynote" ||
   type === "ellipse" ||
   type === "diamond" ||
   type === "freedraw" ||
   type === "arrow" ||
   type === "line" ||
   type === "text" ||
-  type === "embeddable";
+  type === "embeddable" ||
+  type === "autoshape";
 
 export const hasStrokeWidth = (type: ElementOrToolType) =>
   type === "rectangle" ||
@@ -32,7 +36,8 @@ export const hasStrokeWidth = (type: ElementOrToolType) =>
   type === "diamond" ||
   type === "freedraw" ||
   type === "arrow" ||
-  type === "line";
+  type === "line" ||
+  type === "autoshape";
 
 export const hasStrokeStyle = (type: ElementOrToolType) =>
   type === "rectangle" ||
@@ -41,7 +46,13 @@ export const hasStrokeStyle = (type: ElementOrToolType) =>
   type === "ellipse" ||
   type === "diamond" ||
   type === "arrow" ||
-  type === "line";
+  type === "line" ||
+  type === "autoshape";
+
+export const hasRoughness = (type: ElementOrToolType) =>
+  hasStrokeStyle(type) || type === "stickynote";
+
+export const hasFreedrawMode = (type: ElementOrToolType) => type === "freedraw";
 
 export const canChangeRoundness = (type: ElementOrToolType) =>
   type === "rectangle" ||
@@ -49,6 +60,7 @@ export const canChangeRoundness = (type: ElementOrToolType) =>
   type === "embeddable" ||
   type === "line" ||
   type === "diamond" ||
+  type === "stickynote" ||
   type === "image";
 
 export const toolIsArrow = (type: ElementOrToolType) => type === "arrow";

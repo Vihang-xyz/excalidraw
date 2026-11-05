@@ -32,7 +32,7 @@ describe("new sticky note colour", () => {
   };
 
   it("defaults to the standard yellow", () => {
-    expect(h.state.currentItemStickyColor).toBe(COLOR_STICKYNOTE_YELLOW);
+    expect(h.state.currentItemStickynoteBackgroundColor).toBe(COLOR_STICKYNOTE_YELLOW);
     drawNote();
     const note = h.elements.find((el) => el.type === "stickynote");
     expect(note?.backgroundColor).toBe(COLOR_STICKYNOTE_YELLOW);
@@ -41,7 +41,7 @@ describe("new sticky note colour", () => {
   it("uses the colour set for new sticky notes", () => {
     act(() => {
       excalidrawAPI.updateScene({
-        appState: { currentItemStickyColor: "#ffd1e3" },
+        appState: { currentItemStickynoteBackgroundColor: "#ffd1e3" },
       });
     });
     drawNote();
@@ -52,7 +52,7 @@ describe("new sticky note colour", () => {
   it("does not change the fill of new shapes", () => {
     act(() => {
       excalidrawAPI.updateScene({
-        appState: { currentItemStickyColor: "#ffd1e3" },
+        appState: { currentItemStickynoteBackgroundColor: "#ffd1e3" },
       });
       excalidrawAPI.setActiveTool({ type: "rectangle" });
     });

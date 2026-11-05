@@ -8,6 +8,15 @@ export const STICKY_MAX_FONT_SIZE = 72;
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
 
+export const getStickyLabelFontSize = (noteWidth: number): number =>
+  Math.round(
+    clamp(
+      (noteWidth * STICKY_BASE_FONT_SIZE) / STICKY_BASE_SIZE,
+      STICKY_MIN_FONT_SIZE,
+      STICKY_MAX_FONT_SIZE,
+    ),
+  );
+
 export const getStickyCreationSize = (
   zoom: number,
 ): { size: number; fontSize: number } => {
@@ -15,12 +24,5 @@ export const getStickyCreationSize = (
   const size = Math.round(
     clamp(STICKY_BASE_SIZE / safeZoom, STICKY_MIN_SIZE, STICKY_MAX_SIZE),
   );
-  const fontSize = Math.round(
-    clamp(
-      (size * STICKY_BASE_FONT_SIZE) / STICKY_BASE_SIZE,
-      STICKY_MIN_FONT_SIZE,
-      STICKY_MAX_FONT_SIZE,
-    ),
-  );
-  return { size, fontSize };
+  return { size, fontSize: getStickyLabelFontSize(size) };
 };
