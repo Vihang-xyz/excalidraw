@@ -286,7 +286,7 @@ export const MobileToolbar = ({ app, setAppState }: MobileToolbarProps) => {
           <DropdownMenu.Item
             onSelect={() => app.setActiveTool({ type: "stickynote" })}
             icon={stickyNoteToolIcon}
-            shortcut={KEYS.N.toLocaleUpperCase()}
+            shortcut={KEYS.S.toLocaleUpperCase()}
             data-testid="toolbar-stickynote"
             selected={stickyNoteToolSelected}
             disabled={isToolButtonDisabled(app, "stickynote")}

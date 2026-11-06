@@ -120,7 +120,7 @@ export const TOOLS = defineTools({
   },
   stickynote: {
     icon: stickyNoteToolIcon,
-    letterKey: KEYS.N,
+    letterKey: KEYS.S,
   },
   image: {
     icon: ImageIcon,

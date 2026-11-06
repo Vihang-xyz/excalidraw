@@ -382,7 +382,7 @@ describe("toolbar", () => {
     expect(badge("selection")).toBe("V");
     expect(badge("rectangle")).toBe("R");
     expect(badge("text")).toBe("T");
-    expect(badge("stickynote")).toBe("N");
+    expect(badge("stickynote")).toBe("S");
     expect(badge("eraser")).toBe("E");
   });
 });
