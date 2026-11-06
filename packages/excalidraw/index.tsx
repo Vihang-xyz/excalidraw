@@ -461,6 +461,7 @@ export {
 export { reconcileElements } from "./data/reconcile";
 
 export { exportScene, exportToClipboard } from "./scene/export";
+export { exportToBlob, exportToCanvas, exportToSvg } from "./scene/legacyExport";
 
 export type {
   ExportSceneData,
