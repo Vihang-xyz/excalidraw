@@ -375,7 +375,7 @@ export class AppText {
       // caret (i.e. deselect). There's not much use for always selecting
       // the text on edit anyway (and users can select-all from contextmenu
       // if needed)
-      autoSelect: !this.app.editorInterface.isTouchScreen,
+      autoSelect: !this.app.editorInterface.isTouchScreen && !isExistingElement,
     });
     // deselect all other elements when inserting text
     this.app.selection.clear();
